@@ -41,4 +41,11 @@ public class DataExtractor {
             e.printStackTrace();
         }
     }
+    
+    //on passe à cette methode chaque ligne du fichier d'insance pour la nettoyer des caracteres en plus
+    private String clearInput(String input) {
+        input = input.trim();
+        input = input.replaceAll("\\s+", " ");
+        return input;
+    }
 }
