@@ -48,4 +48,8 @@ public class DataExtractor {
         input = input.replaceAll("\\s+", " ");
         return input;
     }
+    
+    public Instance getData() {
+        return instance;
+    }
 }
