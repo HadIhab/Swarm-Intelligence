@@ -35,6 +35,7 @@ public class DataExtractor {
                     }
                 }
             }
+            /* Creation de Instance.list clauses est remplis on peut le manipuler avec la méthode getList() */
             instance.getList();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
