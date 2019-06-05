@@ -17,7 +17,7 @@ public class Instance {
         clauses = new LinkedList<Clause>();
         nb_clauses = 0;
         setNb_literaux(a);
-        getList();
+        //getList(); clauses est vide on peut rien générer 
     }
 
     public LinkedList<Clause> getClauses() {
