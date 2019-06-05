@@ -10,7 +10,8 @@ public class Instance {
     private LinkedList<Clause> clauses; // l'ensemble des clauses
     private int nb_clauses;             //le nombre de clause
     private int nb_literaux;            // le nombre de litteraux
-    private HashMap<Integer, ArrayList<Integer>> list;// pour chaque litteral on garde l'index des clause ou il apparait
+    /*Set list public for test only*/
+    public HashMap<Integer, ArrayList<Integer>> list;// pour chaque litteral on garde l'index des clause ou il apparait
 
     public Instance(int a) {
         clauses = new LinkedList<Clause>();

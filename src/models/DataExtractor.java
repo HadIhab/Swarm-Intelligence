@@ -35,6 +35,7 @@ public class DataExtractor {
                     }
                 }
             }
+            instance.getList();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
