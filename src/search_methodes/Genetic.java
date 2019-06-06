@@ -43,19 +43,54 @@ public class Genetic {
 		}
 		
 		while(true) {
-			/* Sélectionner n individus */
+			/* Sélectionner n individus (for loop) */
 			
 			/*Pour l'instant je fais que 2selections*/
 			selected_individus.add(population.poll());
 			selected_individus.add(population.poll());
 			
 			/***		 Croisement		 ***/
-			if ( Rc>taux_croisement) {
+			if ( Rc > taux_croisement) {
+				
+				Random random = new Random();
+				int nb_shift = random.nextInt(vars_number);
+				LinkedList<Integer> clone1 = selected_individus.get(0);
+				LinkedList<Integer> clone2 = selected_individus.get(0);
+				
+				/*premier croisement pour crée un nv individu*/
+				
+				for ( int i=0;i < nb_shift; i++) {
+					clone1.add(selected_individus.get(1).get(i) );
+				}
+				
+				for ( int i=nb_shift;i < vars_number; i++) {
+					clone1.add(selected_individus.get(0).get(i) );
+				}
+				
+				for ( int i=0;i < (vars_number-nb_shift); i++) {
+					clone2.add(selected_individus.get(0).get(i) );
+				}
+				
+				for ( int i=(vars_number-nb_shift);i < vars_number; i++) {
+					clone2.add(selected_individus.get(1).get(i) );
+				}
 				
 			}
-			if ( Rm>taux_mutation) {
+			
+			if ( Rm > taux_mutation) {
+				
+				Random random = new Random();
+				int mutation1 = random.nextInt(vars_number);
+				int mutation2 = random.nextInt(vars_number);
+				
+				int val1 = (selected_individus.get(0)).get(mutation1);
+				(selected_individus.get(0)).set( mutation1, val1*(-1) );
+				int val2 = (selected_individus.get(0)).get(mutation2);
+				(selected_individus.get(1)).set( mutation1, val2*(-1) );
 				
 			}
+			/*  Évaluation des individus  */
+			
 			
 		} 
 	}
