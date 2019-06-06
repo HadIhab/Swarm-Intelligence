@@ -14,7 +14,7 @@ public class Genetic {
 		this.instance=instance;
 	}
 
-	public void solve() {
+	public void solve(int pop_init_number,int Rc,int taux_croisement,int Rm,int taux_mutation) {
 		
 		/* créer un comparateur pour ordonner la population le plus meilleur vers le moins meilleur */
         Comparator<LinkedList<Integer>> comparator = new Comparator<LinkedList<Integer>>() {
@@ -27,23 +27,37 @@ public class Genetic {
 		
 		/* Création d'une population initiale */
         
-		int pop_init_number = 10;
 		int clauses_number = instance.getNb_clauses();
         int vars_number = instance.getNb_literaux();
         LinkedList<Integer> temp_etat;
         
         PriorityQueue<LinkedList<Integer>> population = new PriorityQueue<>(100, comparator);
+		ArrayList<LinkedList<Integer>> selected_individus = new ArrayList<LinkedList<Integer>>();
         
 		for ( int i=0;i<pop_init_number;i++) {
 			
 			Solution sol = new Solution(vars_number);
 			temp_etat = sol.solutionToEtat();
+			/* L'évaluation des individus (Tris) */
 			population.add(temp_etat);
 		}
 		
-		/* Sélectionner n individus */
-		ArrayList<LinkedList<Integer>> selected_individus;
-	
+		while(true) {
+			/* Sélectionner n individus */
+			
+			/*Pour l'instant je fais que 2selections*/
+			selected_individus.add(population.poll());
+			selected_individus.add(population.poll());
+			
+			/***		 Croisement		 ***/
+			if ( Rc>taux_croisement) {
+				
+			}
+			if ( Rm>taux_mutation) {
+				
+			}
+			
+		} 
 	}
 	
 	private int g(LinkedList<Integer> configuration) {
