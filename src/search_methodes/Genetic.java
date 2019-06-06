@@ -1,6 +1,8 @@
 package search_methodes;
 
 import models.Instance;
+import models.Solution;
+
 import java.util.*;
 
 public class Genetic {
@@ -24,10 +26,23 @@ public class Genetic {
         };
 		
 		/* Création d'une population initiale */
-		int pop_init_number=10;
-		for (int i=0;i<pop_init_number;i++) {
+        
+		int pop_init_number = 10;
+		int clauses_number = instance.getNb_clauses();
+        int vars_number = instance.getNb_literaux();
+        LinkedList<Integer> temp_etat;
+        
+        PriorityQueue<LinkedList<Integer>> population = new PriorityQueue<>(100, comparator);
+        
+		for ( int i=0;i<pop_init_number;i++) {
 			
+			Solution sol = new Solution(vars_number);
+			temp_etat = sol.solutionToEtat();
+			population.add(temp_etat);
 		}
+		
+		/* Sélectionner n individus */
+		ArrayList<LinkedList<Integer>> selected_individus;
 	
 	}
 	
