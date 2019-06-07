@@ -27,7 +27,8 @@ public class Genetic {
 		
 		/* Création d'une population initiale */
         
-		int clauses_number = instance.getNb_clauses();
+		int stag_number=0;
+        int clauses_number = instance.getNb_clauses();
         int vars_number = instance.getNb_literaux();
         LinkedList<Integer> temp_etat;
         
@@ -42,14 +43,15 @@ public class Genetic {
 			population.add(temp_etat);
 		}
 		
-		while(true) {
+		while(stag_number < 6) {
 			/* Sélectionner n individus (for loop) */
 			
 			/*Pour l'instant je fais que 2selections*/
 			selected_individus.add(population.poll());
 			selected_individus.add(population.poll());
 			/* La tête de la file coresponds a la meilleure solution faut la sauvegrader pour répondre au problème de la stagnation  */
-			LinkedList<Integer> clone_solution = selected_individus.get(0);
+			LinkedList<Integer> clone_solution1 = (LinkedList<Integer>)selected_individus.get(0).clone();
+			LinkedList<Integer> clone_solution2 = (LinkedList<Integer>)selected_individus.get(1).clone();
 			/***		 Croisement		 ***/
 			
 			LinkedList<Integer> new_idv1 = selected_individus.get(0);
@@ -94,7 +96,14 @@ public class Genetic {
 				
 			}
 			/*  Évaluation des individus  */
+			population.add(new_idv1);
+			population.add(new_idv2);
+			population.add(clone_solution1);
+			population.add(clone_solution2);
 			
+			if ( population.peek() == clone_solution1) {
+				stag_number++;
+			}
 			
 		} 
 	}
