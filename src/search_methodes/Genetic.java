@@ -14,7 +14,7 @@ public class Genetic {
 		this.instance=instance;
 	}
 
-	public void solve(int pop_init_number,int Rc,int taux_croisement,int Rm,int taux_mutation) {
+	public void solve(int maxItr,int pop_init_number,int Rc,int taux_croisement,int Rm,int taux_mutation) {
 		
 		/* créer un comparateur pour ordonner la population le plus meilleur vers le moins meilleur */
         Comparator<LinkedList<Integer>> comparator = new Comparator<LinkedList<Integer>>() {
@@ -28,6 +28,7 @@ public class Genetic {
 		/* Création d'une population initiale */
         
 		int stag_number=0;
+		int nb_itr=0;
         int clauses_number = instance.getNb_clauses();
         int vars_number = instance.getNb_literaux();
         LinkedList<Integer> temp_etat;
@@ -43,12 +44,13 @@ public class Genetic {
 			population.add(temp_etat);
 		}
 		
-		while(stag_number < 6) {
+		while( stag_number < 6 || nb_itr<=maxItr ) {
 			/* Sélectionner n individus (for loop) */
 			
 			/*Pour l'instant je fais que 2selections*/
 			selected_individus.add(population.poll());
 			selected_individus.add(population.poll());
+			
 			/* La tête de la file coresponds a la meilleure solution faut la sauvegrader pour répondre au problème de la stagnation  */
 			LinkedList<Integer> clone_solution1 = (LinkedList<Integer>)selected_individus.get(0).clone();
 			LinkedList<Integer> clone_solution2 = (LinkedList<Integer>)selected_individus.get(1).clone();
@@ -96,20 +98,29 @@ public class Genetic {
 				
 			}
 			/*  Évaluation des individus  */
+			
 			population.add(new_idv1);
 			population.add(new_idv2);
 			population.add(clone_solution1);
 			population.add(clone_solution2);
+			nb_itr++;
 			
 			if ( population.peek() == clone_solution1) {
 				stag_number++;
 			}
 			
 		} 
+		
+		solution = population.poll();
+		
 	}
 	
 	private int g(LinkedList<Integer> configuration) {
         return instance.get_nb_sat(configuration);
     }
+	
+	public LinkedList<Integer> getSolution(){
+		return solution;
+	}
 	
 }
