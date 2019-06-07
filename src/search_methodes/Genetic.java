@@ -48,32 +48,36 @@ public class Genetic {
 			/*Pour l'instant je fais que 2selections*/
 			selected_individus.add(population.poll());
 			selected_individus.add(population.poll());
-			
+			/* La tête de la file coresponds a la meilleure solution faut la sauvegrader pour répondre au problème de la stagnation  */
+			LinkedList<Integer> clone_solution = selected_individus.get(0);
 			/***		 Croisement		 ***/
+			
+			LinkedList<Integer> new_idv1 = selected_individus.get(0);
+			LinkedList<Integer> new_idv2 = selected_individus.get(1);
+			
 			if ( Rc > taux_croisement) {
 				
 				Random random = new Random();
 				int nb_shift = random.nextInt(vars_number);
-				LinkedList<Integer> clone1 = selected_individus.get(0);
-				LinkedList<Integer> clone2 = selected_individus.get(0);
-				
 				/*premier croisement pour crée un nv individu*/
 				
 				for ( int i=0;i < nb_shift; i++) {
-					clone1.add(selected_individus.get(1).get(i) );
+					new_idv1.set(i,selected_individus.get(1).get(i) );
 				}
 				
 				for ( int i=nb_shift;i < vars_number; i++) {
-					clone1.add(selected_individus.get(0).get(i) );
+					new_idv1.set(i,selected_individus.get(0).get(i) );
 				}
 				
 				for ( int i=0;i < (vars_number-nb_shift); i++) {
-					clone2.add(selected_individus.get(0).get(i) );
+					new_idv2.set(i,selected_individus.get(0).get(i) );
 				}
 				
 				for ( int i=(vars_number-nb_shift);i < vars_number; i++) {
-					clone2.add(selected_individus.get(1).get(i) );
+					new_idv2.set(i,selected_individus.get(1).get(i) );
 				}
+				
+				
 				
 			}
 			
