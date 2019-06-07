@@ -44,9 +44,9 @@ public class Genetic {
 			population.add(temp_etat);
 		}
 		
-		while( stag_number < 6 || nb_itr<=maxItr ) {
-			/* Sélectionner n individus (for loop) */
+		while( stag_number < 6 && nb_itr <= maxItr ) {
 			
+			/* Sélectionner n individus (for loop) */
 			/*Pour l'instant je fais que 2selections*/
 			selected_individus.add(population.poll());
 			selected_individus.add(population.poll());
