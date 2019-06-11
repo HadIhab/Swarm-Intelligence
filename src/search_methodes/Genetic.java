@@ -44,7 +44,7 @@ public class Genetic {
 			population.add(temp_etat);
 		}
 		
-		while( stag_number < 6 && nb_itr <= maxItr ) {
+		while( stag_number < 6 && nb_itr < maxItr ) {
 			
 			/* Sélectionner n individus (for loop) */
 			/*Pour l'instant je fais que 2selections*/
@@ -54,10 +54,11 @@ public class Genetic {
 			/* La tête de la file coresponds a la meilleure solution faut la sauvegrader pour répondre au problème de la stagnation  */
 			LinkedList<Integer> clone_solution1 = (LinkedList<Integer>)selected_individus.get(0).clone();
 			LinkedList<Integer> clone_solution2 = (LinkedList<Integer>)selected_individus.get(1).clone();
+			
 			/***		 Croisement		 ***/
 			
-			LinkedList<Integer> new_idv1 = selected_individus.get(0);
-			LinkedList<Integer> new_idv2 = selected_individus.get(1);
+			LinkedList<Integer> new_idv1 = new LinkedList<Integer>();
+			LinkedList<Integer> new_idv2 = new LinkedList<Integer>();
 			
 			if ( Rc > taux_croisement) {
 				
@@ -66,21 +67,20 @@ public class Genetic {
 				/*premier croisement pour crée un nv individu*/
 				
 				for ( int i=0;i < nb_shift; i++) {
-					new_idv1.set(i,selected_individus.get(1).get(i) );
+					new_idv1.add(selected_individus.get(1).get(i) );
 				}
 				
 				for ( int i=nb_shift;i < vars_number; i++) {
-					new_idv1.set(i,selected_individus.get(0).get(i) );
+					new_idv1.add(selected_individus.get(0).get(i) );
 				}
 				
 				for ( int i=0;i < (vars_number-nb_shift); i++) {
-					new_idv2.set(i,selected_individus.get(0).get(i) );
+					new_idv2.add(selected_individus.get(0).get(i) );
 				}
 				
 				for ( int i=(vars_number-nb_shift);i < vars_number; i++) {
-					new_idv2.set(i,selected_individus.get(1).get(i) );
+					new_idv2.add(selected_individus.get(1).get(i) );
 				}
-				
 				
 				
 			}
@@ -105,12 +105,15 @@ public class Genetic {
 			population.add(clone_solution2);
 			nb_itr++;
 			
-			if ( population.peek() == clone_solution1) {
+			if ( clone_solution1.equals(population.peek())) {
 				stag_number++;
+				System.out.println("Clone : \n"+clone_solution1+"\n"+"new solution : \n"+population.peek()+"\n Stag : "+stag_number+"\n ----------------\nAQ");
+				
+				
 			}
 			
 		} 
-		
+		System.out.println(stag_number);
 		solution = population.poll();
 		
 	}
